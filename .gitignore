@@ -34,3 +34,6 @@ build/
 
 ### AI assistant ###
 CLAUDE.md
+
+#env
+.env
