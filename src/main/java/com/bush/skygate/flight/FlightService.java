@@ -21,21 +21,27 @@ import java.util.UUID;
 public class FlightService {
 
     private final FlightRepository flightRepository;
+    private final FlightMapper flightMapper;
 
-    public FlightService(FlightRepository flightRepository){
+    public FlightService(FlightRepository flightRepository, FlightMapper flightMapper){
         this.flightRepository = flightRepository;
+        this.flightMapper = flightMapper;
     }
 
     /**
      * Finds a flight by its public identifier.
      *
      * @param publicId the externally visible UUID of the flight (not the database id)
-     * @return the matching flight, never {@code null}
+     * @return the flight as a response DTO, never {@code null}
      * @throws BusinessRuleException with {@link ErrorCode#FLIGHT_NOT_FOUND} if no flight has this id
      */
-    public Flight getByPublicId(UUID publicId){
-        return flightRepository.findByPublicId(publicId)
-                .orElseThrow(() -> new BusinessRuleException(ErrorCode.FLIGHT_NOT_FOUND, "Flight not found: publicId=" + publicId));
+    public FlightResponse getByPublicId(UUID publicId){
+        Flight flight = flightRepository.findByPublicId(publicId)
+                                .orElseThrow(() -> new BusinessRuleException(ErrorCode.FLIGHT_NOT_FOUND, "Flight not found: publicId=" + publicId));
+        return flightMapper.toResponse(flight);
+
+
+
     }
 
 
