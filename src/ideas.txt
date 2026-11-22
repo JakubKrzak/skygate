@@ -1,0 +1,20 @@
+Skan karty w bramce:
+
+-Jak potwierdzic ze passanger ma uprawnienia do wejscia na poklad??
+-jakie dane sa potrzebne zeby to potwierdzic??
+
+1.Przeplyw
+zeskanowac karte
+zapytac AODB czy dany lot istnieje, oraz czy bramka na ten lot jest otwarta
+zapytac DCS czy isteniej BCBP wbazie
+porownac dane z karty z danymi w DCS
+sprawdzic, BCBP(kod karty pokladowej)
+wpuscic/nie wpusicc/
+
+2.
+- BCPB,
+- Imie i nazwisko
+- status bramki(czy otwarta)
+
+
+--- tabele
