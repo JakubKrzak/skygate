@@ -1,4 +1,6 @@
-package com.bush.skygate.flight;
+package com.bush.skygate.flight.dto;
+
+import com.bush.skygate.flight.FlightStatus;
 
 import java.time.Instant;
 import java.time.LocalDate;
