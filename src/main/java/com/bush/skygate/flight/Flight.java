@@ -12,6 +12,7 @@ import org.hibernate.type.SqlTypes;
 import java.time.Instant;
 import java.time.LocalDate;
 import java.util.Date;
+import java.util.Locale;
 import java.util.UUID;
 
 @Entity
@@ -66,13 +67,17 @@ public class Flight extends BaseEntity {
     private String destination;
 
     public Flight(String flightNumber, String origin, String destination,
-                  Short capacity, LocalDate scheduledDepartureDate ,Instant estimatedDepartureAt) {
-        this.flightNumber = flightNumber;
-        this.origin = origin;
-        this.destination = destination;
+                  Short capacity, LocalDate scheduledDepartureDate ,Instant estimatedDepartureAt, String gate, Instant boardingAt,
+                  Instant gateClosesAt) {
+        this.flightNumber = flightNumber.toUpperCase(Locale.ROOT);
+        this.origin = origin.toUpperCase(Locale.ROOT);
+        this.destination = destination.toUpperCase(Locale.ROOT);
         this.capacity = capacity;
         this.scheduledDepartureDate = scheduledDepartureDate;
         this.estimatedDepartureAt = estimatedDepartureAt;
+        this.gate = gate.toUpperCase(Locale.ROOT);
+        this.boardingAt = boardingAt;
+        this.gateClosesAt = gateClosesAt;
     }
 
 }
