@@ -1,4 +1,6 @@
 package com.bush.skygate.booking;
 
-public enum BookingLanguageStatus {
+public enum BookingLanguage {
+    pl,
+    en
 }
