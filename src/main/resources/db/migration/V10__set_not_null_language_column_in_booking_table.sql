@@ -1,0 +1,2 @@
+ALTER TABLE bookinG
+    ALTER COLUMN language SET NOT NULL;
