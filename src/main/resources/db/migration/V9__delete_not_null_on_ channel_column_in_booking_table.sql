@@ -1,0 +1,2 @@
+ALTER TABLE booking
+    ALTER COLUMN channel DROP NOT NULL;

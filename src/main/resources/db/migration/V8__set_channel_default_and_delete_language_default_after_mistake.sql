@@ -1,0 +1,5 @@
+ALTER TABLE booking
+    ALTER COLUMN channel DROP DEFAULT;
+
+ALTER TABLE booking
+    ALTER COLUMN language SET DEFAULT 'en';
