@@ -31,4 +31,17 @@ public class BookingController {
             @PathVariable UUID publicId){
         return bookingService.getByPublicId(publicId);
     }
+
+    /**
+     * {@code GET /api/v1/booking/by-reference/{bookingReference}}: returns full details of one booking.
+     *
+     * @param bookingReference the human-readable booking code
+     * @return the booking as a DTO
+     */
+    @GetMapping("/by-reference/{bookingReference}")
+    public BookingResponse getByBookingReference(
+            @PathVariable String bookingReference
+    ){
+        return bookingService.getByBookingReference(bookingReference);
+    }
 }

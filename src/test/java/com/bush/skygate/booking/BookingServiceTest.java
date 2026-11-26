@@ -1,6 +1,9 @@
 package com.bush.skygate.booking;
 
 import com.bush.skygate.booking.dto.BookingResponse;
+import com.bush.skygate.common.error.BusinessRuleException;
+import com.bush.skygate.common.error.ErrorCode;
+import com.bush.skygate.flight.FlightMapper;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -36,7 +39,17 @@ public class BookingServiceTest {
 
         BookingResponse result = bookingService.getByPublicId(PUBLIC_ID);
         assertThat(result).isEqualTo(response);
+    }
+    @Test
+    public void getByPublicId_throwBookingNotFoundError_whenBookingNotExists(){
+        when(bookingRepository.findByPublicId(PUBLIC_ID)).thenReturn(Optional.empty());
 
+        assertThatThrownBy(() -> bookingService.getByPublicId(PUBLIC_ID))
+                .isInstanceOf(BusinessRuleException.class)
+                .extracting("code")
+                .isEqualTo(ErrorCode.BOOKING_NOT_FOUND);
+
+        verifyNoInteractions(bookingMapper);
     }
 
     private  BookingResponse aBookingResponse(){

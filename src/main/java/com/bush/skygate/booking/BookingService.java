@@ -1,6 +1,7 @@
 package com.bush.skygate.booking;
 
 import com.bush.skygate.booking.dto.BookingResponse;
+import com.bush.skygate.booking.utils.BookingReferenceGenerator;
 import com.bush.skygate.common.error.BusinessRuleException;
 import com.bush.skygate.common.error.ErrorCode;
 import org.springframework.stereotype.Service;
@@ -33,4 +34,18 @@ public class BookingService {
                  .orElseThrow(() -> new BusinessRuleException(ErrorCode.BOOKING_NOT_FOUND, "Booking not found: publicId=" + publicId));
          return bookingMapper.toResponse(booking);
     }
+
+    /**
+     * Finds a booking by its human-readable reference.
+     *
+     * @param bookingReference the booking code, matched as given
+     * @return the booking as a DTO
+     * @throws BusinessRuleException with {@link ErrorCode#BOOKING_NOT_FOUND} if no booking has this reference
+     */
+    public BookingResponse getByBookingReference(String bookingReference){
+        Booking booking = bookingRepository.findByBookingReference(bookingReference)
+                .orElseThrow(() -> new BusinessRuleException(ErrorCode.BOOKING_NOT_FOUND, "Booking not found: booking reference=" + bookingReference));
+        return bookingMapper.toResponse(booking);
+    }
+
 }
